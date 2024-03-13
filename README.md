@@ -1,2 +1,3 @@
-# install_scripts
-Scripts to install tools
+# README
+
+Scripts to install tools from their source.
