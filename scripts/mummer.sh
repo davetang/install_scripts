@@ -9,12 +9,12 @@ OUTDIR=${HOME}/bin/${TOOL}-${VER}
 URL=https://github.com/mummer4/mummer/releases/download/v${VER}/${TOOL_VER}.tar.gz
 TMPDIR=$(mktemp -d)
 
+trap "rm -rf ${TMPDIR}" SIGINT SIGTERM
+
 if [[ -d ${OUTDIR} ]]; then
    >&2 echo ${OUTDIR} already exists
    exit 1
 fi
-
-trap "rm -rf ${TMPDIR}" SIGINT SIGTERM
 
 cd ${TMPDIR}
 wget ${URL} -O ${TOOL_VER}.tar.gz
