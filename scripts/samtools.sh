@@ -8,6 +8,8 @@ URL=https://github.com/samtools/samtools/releases/download/${VER}/${TOOL}-${VER}
 OUTDIR=${HOME}/bin/${TOOL}-${VER}
 TMPDIR=$(mktemp -d)
 
+trap "rm -rf ${TMPDIR}" SIGINT SIGTERM
+
 if [[ -d ${OUTDIR} ]]; then
    >&2 echo ${OUTDIR} already exists
    exit 1
