@@ -1,4 +1,9 @@
 #!/usr/bin/env bash
+#
+# Needed to install the following for Debian 12
+# sudo apt update
+# sudo apt install -y tcl tcl-dev tk-dev
+#
 
 set -euo pipefail
 
