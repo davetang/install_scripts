@@ -3,7 +3,9 @@
 set -euo pipefail
 
 TOOL=aws-cli
-OUTDIR=${HOME}/bin/${TOOL}
+SCRIPT_DIR=$(dirname $(realpath $0))
+source ${SCRIPT_DIR}/config.sh
+OUTDIR=${BIN}/${TOOL}
 TMPDIR=$(mktemp -d)
 
 trap "rm -rf ${TMPDIR}" SIGINT SIGTERM

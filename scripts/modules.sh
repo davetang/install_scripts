@@ -10,7 +10,9 @@ set -euo pipefail
 VER=5.4.0
 TOOL=modules
 URL=https://github.com/cea-hpc/modules/releases/download/v${VER}/${TOOL}-${VER}.tar.gz
-OUTDIR=${HOME}/bin/${TOOL}-${VER}
+SCRIPT_DIR=$(dirname $(realpath $0))
+source ${SCRIPT_DIR}/config.sh
+OUTDIR=${BIN}/${TOOL}-${VER}
 
 read -p "This script will try to install ${TOOL} version ${VER} in ${OUTDIR}; do you want to continue? y/[n]" continue
 

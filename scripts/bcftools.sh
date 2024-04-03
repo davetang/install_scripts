@@ -5,7 +5,9 @@ set -euo pipefail
 VER=1.19
 TOOL=bcftools
 URL=https://github.com/samtools/bcftools/releases/download/${VER}/${TOOL}-${VER}.tar.bz2
-OUTDIR=${HOME}/bin/${TOOL}-${VER}
+SCRIPT_DIR=$(dirname $(realpath $0))
+source ${SCRIPT_DIR}/config.sh
+OUTDIR=${BIN}/${TOOL}-${VER}
 TMPDIR=$(mktemp -d)
 
 trap "rm -rf ${TMPDIR}" SIGINT SIGTERM
