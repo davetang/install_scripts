@@ -13,10 +13,8 @@ TMPDIR=$(mktemp -d)
 
 trap "rm -rf ${TMPDIR}" SIGINT SIGTERM
 
-if [[ -d ${OUTDIR} ]]; then
-   >&2 echo ${OUTDIR} already exists
-   exit 1
-fi
+source ${SCRIPT_DIR}/utils.sh
+make_install_dir ${OUTDIR}
 
 cd ${TMPDIR}
 wget ${URL} -O ${TOOL_VER}.tar.gz

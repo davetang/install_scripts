@@ -12,12 +12,8 @@ TMPDIR=$(mktemp -d)
 
 trap "rm -rf ${TMPDIR}" SIGINT SIGTERM
 
-if [[ -d ${OUTDIR} ]]; then
-   >&2 echo ${OUTDIR} already exists
-   exit 1
-else
-   mkdir ${OUTDIR}
-fi
+source ${SCRIPT_DIR}/utils.sh
+make_install_dir ${OUTDIR}
 
 install_tool(){
    if [[ $# != 1 ]]; then
