@@ -11,3 +11,8 @@ make_install_dir(){
       mkdir -p ${OUTDIR}
    fi
 }
+
+get_kernel_name(){
+   # -s, --kernel-name print the kernel name
+   uname -s
+}
