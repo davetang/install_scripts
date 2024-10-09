@@ -16,3 +16,8 @@ get_kernel_name(){
    # -s, --kernel-name print the kernel name
    uname -s
 }
+
+get_arch(){
+   # -m Write the type of the current hardware platform to standard output
+   uname -m
+}

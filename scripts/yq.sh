@@ -2,8 +2,8 @@
 
 set -euo pipefail
 
-TOOL=bat
-VER=0.24.0
+TOOL=yq
+VER=4.44.3
 TOOL_VER=${TOOL}-${VER}
 SCRIPT_DIR=$(dirname $(realpath $0))
 source ${SCRIPT_DIR}/config.sh
@@ -15,7 +15,7 @@ OS=$(get_kernel_name)
 
 trap "rm -rf ${TMPDIR}" SIGINT SIGTERM
 
-install_bat(){
+install_yq(){
    if [[ $# != 1 ]]; then
       >&2 echo Please provide URL
       exit 1
@@ -24,31 +24,28 @@ install_bat(){
    cd ${TMPDIR}
 
    wget --quiet ${URL} \
-      && tar xzf bat-*.tar.gz \
-      && mv -f bat-*/bat ${OUTDIR}
+      && chmod 755 yq_* \
+      && mv yq_* ${OUTDIR}
 
    cd
    rm -rf ${TMPDIR}
 }
 
 if [[ ${OS} == Darwin ]]; then
-   if [[ ${ARCH} == x86_64 ]]; then
+   if [[ ${ARCH} == arm64 ]]; then
       make_install_dir ${OUTDIR}
-      install_bat https://github.com/sharkdp/bat/releases/download/v${VER}/bat-v${VER}-x86_64-apple-darwin.tar.gz
+      install_yq https://github.com/mikefarah/yq/releases/download/v${VER}/yq_darwin_arm64
    else
       >&2 echo Unsupported arch: ${ARCH}
       exit 1
    fi
 elif [[ ${OS} =~ Linux ]]; then
    if [[ ${ARCH} == x86_64 ]]; then
-      make_install_dir ${OUTDIR}
-      install_bat https://github.com/sharkdp/bat/releases/download/v${VER}/bat-v${VER}-x86_64-unknown-linux-musl.tar.gz
+      echo Please implement
    elif [[ ${ARCH} =~ arm ]]; then
-      make_install_dir ${OUTDIR}
-      install_bat https://github.com/sharkdp/bat/releases/download/v${VER}/bat-v${VER}-arm-unknown-linux-musleabihf.tar.gz
+      echo Please implement
    elif [[ ${ARCH} =~ aarch64 ]]; then
-      make_install_dir ${OUTDIR}
-      install_bat https://github.com/sharkdp/bat/releases/download/v${VER}/bat-v${VER}-aarch64-unknown-linux-gnu.tar.gz
+      echo Please implement
    else
       >&2 echo Unsupported arch: ${ARCH}
       exit 1
