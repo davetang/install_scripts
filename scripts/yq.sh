@@ -41,7 +41,8 @@ if [[ ${OS} == Darwin ]]; then
    fi
 elif [[ ${OS} =~ Linux ]]; then
    if [[ ${ARCH} == x86_64 ]]; then
-      echo Please implement
+      make_install_dir ${OUTDIR}
+      install_yq https://github.com/mikefarah/yq/releases/download/v${VER}/yq_linux_amd64
    elif [[ ${ARCH} =~ arm ]]; then
       echo Please implement
    elif [[ ${ARCH} =~ aarch64 ]]; then
