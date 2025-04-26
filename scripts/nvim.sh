@@ -3,7 +3,7 @@
 set -euo pipefail
 
 TOOL=nvim
-VER=0.9.5
+VER=0.11.0
 TOOL_VER=${TOOL}-${VER}
 SCRIPT_DIR=$(dirname $(realpath $0))
 source ${SCRIPT_DIR}/config.sh
@@ -16,10 +16,18 @@ source ${SCRIPT_DIR}/utils.sh
 make_install_dir ${OUTDIR}
 
 KERNEL=$(get_kernel_name)
+ARCH=$(get_arch)
 if [[ ${KERNEL} == Linux ]]; then
-   URL=https://github.com/neovim/neovim/releases/download/v${VER}/nvim-linux64.tar.gz
+   if [[ ${ARCH} == x86_64 ]]; then
+      URL=https://github.com/neovim/neovim/releases/download/v${VER}/nvim-linux-x86_64.tar.gz
+   elif [[ ${ARCH} == aarch64 ]]; then
+      URL=https://github.com/neovim/neovim/releases/download/v${VER}/nvim-linux-arm64.tar.gz
+   else
+      >&2 echo Unsupported architecture: ${ARCH}
+   fi
 elif [[ ${KERNEL} == Darwin ]]; then
-   URL=https://github.com/neovim/neovim/releases/download/v${VER}/nvim-macos.tar.gz
+   # assume Apple Silicon for now
+   URL=https://github.com/neovim/neovim/releases/download/v${VER}/nvim-macos-arm64.tar.gz
 else
    >&2 echo Unsupported platform: ${KERNEL}
 fi
