@@ -7,20 +7,22 @@ if [[ -d ${HOME}/miniforge3 ]]; then
    exit 1
 fi
 
-ARCH=$(arch)
-OS=$(uname -o)
+SCRIPT_DIR=$(dirname $(realpath $0))
+source ${SCRIPT_DIR}/utils.sh
+KERNEL=$(get_kernel_name)
+ARCH=$(get_arch)
 
-if [[ ${ARCH} == x86_64 && ${OS} =~ Linux ]]; then
+if [[ ${ARCH} == x86_64 && ${KERNEL} == Linux ]]; then
    URL=https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh
-elif [[ ${ARCH} == aarch64 && {OS} =~ Linux ]]; then
+elif [[ ${ARCH} == aarch64 && ${KERNEL} == Linux ]]; then
    URL=https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-aarch64.sh
-elif [[ ${ARCH} =~ arm && {OS} =~ Darwin ]]; then
+elif [[ ${ARCH} =~ arm && ${KERNEL} =~ Darwin ]]; then
    URL=https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-MacOSX-arm64.sh
 else
-   >&2 echo Unexpected architecture ${ARCH} and OS combination ${OS}
+   >&2 echo Unexpected architecture ${ARCH} and kernel combination ${KERNEL}
    exit 1
 fi
->&2 echo ${ARCH} and ${OS} detected
+>&2 echo ${ARCH} and ${KERNEL} detected
 
 SCRIPT=$(basename ${URL})
 
