@@ -21,3 +21,13 @@ get_arch(){
    # -m Write the type of the current hardware platform to standard output
    uname -m
 }
+
+find_tool(){
+   TOOL=$1
+   if command -v ${TOOL} > /dev/null 2>&1; then
+      >&2 echo "${TOOL} found"
+   else
+      >&2 echo "${TOOL} is required and was not found"
+      exit 1
+   fi
+}
