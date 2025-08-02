@@ -19,21 +19,31 @@ KERNEL=$(get_kernel_name)
 ARCH=$(get_arch)
 if [[ ${KERNEL} == Linux ]]; then
    if [[ ${ARCH} == x86_64 ]]; then
+      >&2 echo ${KERNEL} ${ARCH} detected
       URL=https://github.com/neovim/neovim/releases/download/v${VER}/nvim-linux-x86_64.tar.gz
    elif [[ ${ARCH} == aarch64 ]]; then
+      >&2 echo ${KERNEL} ${ARCH} detected
       URL=https://github.com/neovim/neovim/releases/download/v${VER}/nvim-linux-arm64.tar.gz
    else
       >&2 echo Unsupported architecture: ${ARCH}
    fi
 elif [[ ${KERNEL} == Darwin ]]; then
-   # assume Apple Silicon for now
-   URL=https://github.com/neovim/neovim/releases/download/v${VER}/nvim-macos-arm64.tar.gz
+   if [[ ${ARCH} == x86_64 ]]; then
+      >&2 echo ${KERNEL} ${ARCH} detected
+      URL=https://github.com/neovim/neovim/releases/download/v${VER}/nvim-macos-x86_64.tar.gz
+   elif [[ ${ARCH} == arm64 ]]; then
+      >&2 echo ${KERNEL} ${ARCH} detected
+      URL=https://github.com/neovim/neovim/releases/download/v${VER}/nvim-macos-arm64.tar.gz
+   else
+      >&2 echo Unsupported architecture: ${ARCH}
+   fi
 else
    >&2 echo Unsupported platform: ${KERNEL}
 fi
 
 cd ${TMPDIR}
-wget ${URL}
+>&2 echo Downloading from ${URL}
+wget --quiet ${URL}
 tar xzf ${TOOL}-*.tar.gz
 rm ${TOOL}-*.tar.gz
 cd ${TOOL}-*
