@@ -13,11 +13,12 @@ TMPDIR=$(mktemp -d)
 trap "rm -rf ${TMPDIR}" SIGINT SIGTERM
 
 source ${SCRIPT_DIR}/utils.sh
+find_tool xz
 make_install_dir ${OUTDIR}
 
 cd ${TMPDIR}
 wget ${URL} -O ${TOOL}-${VER}.tar.xz
-tar xf ${TOOL}-${VER}.tar.xz
+tar xJf ${TOOL}-${VER}.tar.xz
 cd ${TOOL}-${VER}
 ./configure --prefix=${OUTDIR}
 make && make install
