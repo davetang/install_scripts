@@ -3,7 +3,7 @@ make_install_dir(){
       >&2 echo Please provide DIR path
       exit 1
    fi
-   OUTDIR=$1
+   local OUTDIR=$1
    if [[ -d ${OUTDIR} ]]; then
       >&2 echo ${OUTDIR} already exists
       exit 1
@@ -23,7 +23,7 @@ get_arch(){
 }
 
 find_tool(){
-   TOOL=$1
+   local TOOL=$1
    if command -v ${TOOL} > /dev/null 2>&1; then
       >&2 echo "${TOOL} found"
    else
