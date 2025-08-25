@@ -23,7 +23,7 @@ echo "4f18ddae154e793e46eeab727c59ef1c0c0c2b744e7b94219710d76f530629ae  ${TOOL}-
 tar xzf ${TOOL}-${VER}.tar.gz
 cd ${TOOL}-${VER}
 make all test
-mv src/lua src/luac ${OUTDIR}
+mv * ${OUTDIR}
 cd
 
 rm -rf ${TMPDIR}
