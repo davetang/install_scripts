@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-VER=1.22.3
+VER=1.25.1
 TOOL=go
 URL=https://go.dev/dl/go${VER}.linux-amd64.tar.gz
 SCRIPT_DIR=$(dirname $(realpath $0))
