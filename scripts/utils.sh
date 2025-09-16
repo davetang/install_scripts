@@ -31,3 +31,11 @@ find_tool(){
       exit 1
    fi
 }
+
+ensure_dir(){
+   local MY_DIR="$1"
+   if [[ ! -d "${MY_DIR}" ]]; then
+      >&2 echo "Creating ${MY_DIR}"
+      mkdir -p "${MY_DIR}"
+   fi
+}
