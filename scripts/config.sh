@@ -1,5 +1,5 @@
+source utils.sh
 BIN=${HOME}/bin
-if [[ ! -d ${BIN} ]]; then
-   >&2 echo Creating ${BIN}
-   mkdir ${BIN}
-fi
+LIB=${HOME}/lib
+ensure_dir ${BIN}
+ensure_dir ${LIB}
