@@ -4,6 +4,7 @@ set -euo pipefail
 
 VER=5.4.8
 TOOL=lua
+INCLUDE_DIR=${HOME}/include/lua/5.4/
 URL=https://www.lua.org/ftp/lua-${VER}.tar.gz
 SCRIPT_DIR=$(dirname $(realpath $0))
 source ${SCRIPT_DIR}/config.sh
@@ -23,9 +24,10 @@ echo "4f18ddae154e793e46eeab727c59ef1c0c0c2b744e7b94219710d76f530629ae  ${TOOL}-
 tar xzf ${TOOL}-${VER}.tar.gz
 cd ${TOOL}-${VER}
 make all test
+mkdir -p "${INCLUDE_DIR}"
+cp -vf src/lua.h "${INCLUDE_DIR}"
 mv * ${OUTDIR}
 cd
-
 rm -rf ${TMPDIR}
 
 >&2 echo Done
