@@ -3,7 +3,7 @@
 set -euo pipefail
 
 TOOL=nvim
-VER=0.11.3
+VER=0.11.5
 TOOL_VER=${TOOL}-${VER}
 SCRIPT_DIR=$(dirname $(realpath $0))
 source ${SCRIPT_DIR}/config.sh
